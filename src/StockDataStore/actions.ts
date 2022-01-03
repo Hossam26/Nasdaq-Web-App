@@ -26,3 +26,5 @@ export const getNextStockData = async () => {
 
   return state.Data.Stocks;
 };
+
+

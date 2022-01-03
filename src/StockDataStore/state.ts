@@ -5,6 +5,5 @@ export const state:State={
     Data:{
      Stocks:[],
      NextUrl:"",
-       
     }
 }

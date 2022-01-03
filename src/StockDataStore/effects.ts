@@ -10,4 +10,5 @@ nextStockData: async (nextUrl:string)=>{
     const StockApiResponse= await axios.get(`${nextUrl}&apiKey=${apiKey}`)
     return StockApiResponse.data
 }
+
 }

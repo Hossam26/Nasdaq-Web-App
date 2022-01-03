@@ -7,12 +7,12 @@ export type Props = {
   getSearchResult: (KeyWord: string) => void;
 };
 
-const Search: React.FC<Props> = ({ getSearchResult }) => {
+const SearchBar: React.FC<Props> = ({ getSearchResult }) => {
   return (
     <Form className="d-flex mt-2 w-75 m-auto">
       <FormControl
         type="search"
-        placeholder="Search by stock name"
+        placeholder="Search by stock ticker"
         className="me-2"
         onChange={(e) => getSearchResult(e.target.value)}
       />
@@ -21,4 +21,4 @@ const Search: React.FC<Props> = ({ getSearchResult }) => {
   );
 };
 
-export default Search
+export default SearchBar;

@@ -6,10 +6,25 @@ import {useStock} from "./useStock"
 import NavBarComponent from "../Navbar/Navbar";
 import SearchBar from "./SearchBar/SearchBar";
 const ExploreScreen: React.FC = () => {
-  const {stocks, isLoadingStocks, getStockData, getNextStockData} = useStock();
-  
+  const {
+    stocks,
+    isLoadingStocks,
+    getStockData,
+    getNextData,
+    searchIsActive,
+    getSearchResults,
+    getCurrentStocks
+  } = useStock();
   const getSearchResult = (Keyword: string) => {
-    console.log(Keyword);
+    if(Keyword.length!=0){
+    searchIsActive(true);
+      getSearchResults(Keyword)
+    }
+    else{
+      searchIsActive(false)
+      getCurrentStocks()
+    }
+    
   };
 useEffect(()=>{
 
@@ -23,7 +38,7 @@ useEffect(()=>{
       <StockList
         stocks={stocks}
         isLoadingStocks={isLoadingStocks}
-        getNextStockData={getNextStockData}
+        getNextStockData={getNextData}
       />  
     </div>
   );

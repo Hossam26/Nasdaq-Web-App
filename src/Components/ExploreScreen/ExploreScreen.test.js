@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen,fireEvent } from "@testing-library/react";
 import ExploreScreen from "./ExploreScreen";
 
 describe("loading spinner",()=>{
@@ -8,6 +8,6 @@ it('on initial render, the loading spinner appear to notify the user that there 
   render(<ExploreScreen />)
  
    expect( screen.getByTestId(/spinner/i)).toBeVisible()
-
+   fireEvent.scroll
 })
 })

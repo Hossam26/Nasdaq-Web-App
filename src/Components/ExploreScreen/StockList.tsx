@@ -26,11 +26,11 @@ return (
     <StyledContainer>
       <Row className="justify-content-center">
         {isLoadingStocks && (
-          <Spinner data-testid="spinner" animation="grow" variant="light" />
+          <Spinner className="position-fixed" data-testid="spinner" animation="grow" variant="light" />
         )}
         {stocks.map((stock, index) => (
           <StyledGrid md="4" key={index}>
-            <Link to={"/StockDetails/" + index}>
+            <Link to={"/StockDetails/" + stock.ticker}>
               <Ticker>{stock.ticker}</Ticker>
               <Name>{stock.name}</Name>
             </Link>

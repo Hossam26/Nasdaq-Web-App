@@ -13,12 +13,40 @@ export const useStock = () => {
     }
   };
 
-  const getNextStockData = async () => {
+  const getNextData = async () => {
     setIsLoading(true);
-    const updatedData = await actions.getNextStockData();
+    const updatedData = await actions.getNextData();
     setStocks(updatedData);
     setIsLoading(false);
   };
+ const searchIsActive = (Active: boolean) => {
+   actions.searchIsActive(Active);
+   
+ };
+ const getSearchResults = async (searchKey: string) => {
+           setIsLoading(true);
 
-  return { stocks, getStockData, getNextStockData, isLoadingStocks };
+  await actions.setSearchKey(searchKey);
+    const stockData = await actions.Loadsearch();
+    setStocks(stockData);
+    setIsLoading(false);
+   
+ };
+ const getCurrentStocks =() => {
+      setIsLoading(true);
+      const updatedData = actions.getCurrentStocks();
+      setStocks(updatedData);
+      setIsLoading(false);
+   
+ };
+
+  return {
+    stocks,
+    isLoadingStocks,
+    getStockData,
+    getNextData,
+    searchIsActive,
+    getSearchResults,
+    getCurrentStocks,
+  };
 };

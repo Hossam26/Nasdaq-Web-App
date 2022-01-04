@@ -19,7 +19,7 @@ describe("useStock functions",()=>{
                
 
      await act(async()=>{
-          await  result.current.getNextStockData()
+          await  result.current.getNextData()
 
         })
         expect(result.current.stocks.length).toBeGreaterThan(intitialDataLimit)

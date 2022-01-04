@@ -14,6 +14,17 @@ export const loadApp = async () => {
 
   return state.Data.Stocks;
 };
+export const getNextData = async () => {
+  if(state.searchIsActive==true){
+    
+    
+      return getNextSearchData()
+  }
+  else{
+    return getNextStockData()
+  }
+
+};
 export const getNextStockData = async () => {
   if (state.Data.NextUrl != null) {
     const stateData = await effects.Api.nextStockData(state.Data.NextUrl);
@@ -27,4 +38,45 @@ export const getNextStockData = async () => {
   return state.Data.Stocks;
 };
 
+export const getNextSearchData = async () => {
+  
+ if (state.searchresults.NextUrl != null) {
+   const stateData = await effects.Api.nextSearchData(state.searchresults.NextUrl);
 
+   state.searchresults.StockResults = [
+     ...state.searchresults.StockResults,
+     ...stateData.results,
+   ];
+
+   state.searchresults.NextUrl = stateData.next_url;
+     
+
+ }
+
+   return state.searchresults.StockResults;
+
+};
+export const Loadsearch = async () => {
+   const stateData = await effects.Api.getInitialSearch(state.searchKey);
+   console.log(stateData);
+   
+   state.searchresults.StockResults = stateData.results;
+   state.searchresults.NextUrl = stateData.next_url;
+ 
+ 
+return state.searchresults.StockResults
+ 
+};
+export const searchIsActive=(value:boolean)=>{
+
+state.searchIsActive=value;
+
+}
+export const setSearchKey=(value:string)=>{
+
+  state.searchKey=value;
+}
+export const getCurrentStocks = () => {
+    return state.Data.Stocks;
+
+};

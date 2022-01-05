@@ -76,7 +76,7 @@ const Splash:React.FC<Iprops>=({Loading})=>{
                 />
               </div>
               <div>
-                <h1 className="name">By Hossam Bassem</h1>
+                <h1 className="name">By: Hossam Bassem</h1>
               </div>
             </div>
           </div>

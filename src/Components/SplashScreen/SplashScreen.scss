@@ -1,0 +1,39 @@
+.splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: lightsteelblue;
+  z-index: 999;
+  text-align: center;
+  display: flex;
+  
+  justify-content: center;
+  align-items: center;
+  animation:fadeOut ease-in 6s;
+}
+@keyframes fadeOut {
+ to{
+     opacity: 0;
+ }
+}
+.name {
+  position: absolute;
+  bottom: 5%;
+  transform: translateX(-35%);
+  opacity: 0;
+  animation: fadeIn 2s ease-in forwards;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+
+.fadeIn {
+  transform: translateX(-20%);
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}

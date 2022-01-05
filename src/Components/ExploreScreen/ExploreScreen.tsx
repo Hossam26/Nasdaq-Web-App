@@ -4,6 +4,7 @@ import StockList from "./StockList"
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useStock} from "./useStock"
 import NavBarComponent from "../Navbar/Navbar";
+
 import SearchBar from "./SearchBar/SearchBar";
 const ExploreScreen: React.FC = () => {
   const {

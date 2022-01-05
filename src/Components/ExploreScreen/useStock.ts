@@ -25,7 +25,7 @@ export const useStock = () => {
  };
  const getSearchResults = async (searchKey: string) => {
            setIsLoading(true);
-
+     
   await actions.setSearchKey(searchKey);
     const stockData = await actions.Loadsearch();
     setStocks(stockData);

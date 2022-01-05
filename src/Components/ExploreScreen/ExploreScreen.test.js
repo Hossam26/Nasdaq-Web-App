@@ -8,6 +8,5 @@ it('on initial render, the loading spinner appear to notify the user that there 
   render(<ExploreScreen />)
  
    expect( screen.getByTestId(/spinner/i)).toBeVisible()
-   fireEvent.scroll
 })
 })

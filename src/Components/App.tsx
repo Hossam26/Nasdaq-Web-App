@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ExploreScreen from './ExploreScreen/ExploreScreen'
 import StockDetails from './StockDetails/StockDetails'
 import Splash from './SplashScreen/SplashScreen'
-function App() {
+function App(){
   const [load,setLoad]=useState<boolean>(true)
   useEffect(()=>{
 

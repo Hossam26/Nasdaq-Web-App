@@ -7,10 +7,12 @@ import { createOvermind } from 'overmind'
 const overmind = createOvermind(config)
     
 ReactDOM.render(
-  
+    <React.StrictMode>
+
       <Provider value={overmind}>
     <App />
       </Provider>
+  </React.StrictMode>
 
  ,
   document.getElementById('root')

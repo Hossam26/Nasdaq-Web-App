@@ -26,14 +26,20 @@ return (
     <StyledContainer>
       <Row className="justify-content-center">
         {isLoadingStocks && (
-          <Spinner className="position-fixed" data-testid="spinner" animation="grow" variant="light" />
+          <Spinner
+            className="position-fixed"
+            data-testid="spinner"
+            animation="grow"
+            variant="light"
+          />
         )}
         {stocks.map((stock, index) => (
-          <StyledGrid md="4" key={index}>
-            <Link to={"/StockDetails/" + stock.ticker}>
-              <Ticker>{stock.ticker}</Ticker>
-              <Name>{stock.name}</Name>
-            </Link>
+          <StyledGrid data-testid="stockList" md="4" key={index}>
+              
+              <Link to={"/StockDetails/" + stock.ticker}>
+                <Ticker>{stock.ticker}</Ticker>
+                <Name>{stock.name}</Name>
+              </Link>
             {index === stocks.length - 1 && (
               <Waypoint onEnter={() => getNextStockData()} />
             )}

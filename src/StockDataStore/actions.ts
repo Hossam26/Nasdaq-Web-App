@@ -59,7 +59,7 @@ export const getNextSearchData = async () => {
 
 };
 export const Loadsearch = async () => {
-   const searchData = await effects.Api.getInitialSearch(state.searchKey);
+   const searchData = await effects.Api.getInitialSearch(state.searchKey)
    state.searchResults.StockResults = searchData.results;
    state.searchResults.NextUrl = searchData.next_url;
  

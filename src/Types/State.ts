@@ -1,16 +1,20 @@
 import { Stock } from "./Stock";
 import { TickerPrevDayInfo } from "./TickerPrevDayInfo";
-import { TickercompanyInfo } from "./TickerCompanyInfo";
+import { TickerCompanyInfo } from "./TickerCompanyInfo";
 export type State = {
-  Data: {
+  data: {
     Stocks: Stock[];
     NextUrl: string;
   };
   searchIsActive: boolean;
   firstSearch: boolean;
   searchKey: string;
-  searchresults: {
+  searchResults: {
     StockResults: Stock[];
     NextUrl: string;
+  };
+  stockDetails: {
+    TickerPrevDayInfo: TickerPrevDayInfo;
+    TickerCompanyInfo: TickerCompanyInfo;
   };
 };

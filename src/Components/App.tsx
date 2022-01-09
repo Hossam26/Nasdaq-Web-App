@@ -18,7 +18,7 @@ function App(){
 
       <Routes>
         <Route path="/" element={<ExploreScreen />} />
-        <Route path="/StockDetails/:id" element={<StockDetails />} />
+        <Route path="/StockDetails/:Ticker" element={<StockDetails />} />
       </Routes>
     </Router>
   );

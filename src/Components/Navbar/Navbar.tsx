@@ -1,11 +1,16 @@
 import React from "react";
 
 import {
+  Button,
   Container,
   Navbar,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import styled from 'styled-components';
-const NavBarComponent: React.FC = () => {
+interface Iprops{
+  Home:boolean
+}
+const NavBarComponent: React.FC<Iprops> = ({Home}) => {
 const StyledNavbar = styled(Navbar)`
 
    height:7vh;
@@ -69,6 +74,7 @@ const StyledNavbar = styled(Navbar)`
             ></path>
           </svg>
         </StyledNavbar.Brand>
+           {Home && <Link to="/"><Button variant="primary">Home</Button> </Link>}
       </Container>
     </StyledNavbar>
   );

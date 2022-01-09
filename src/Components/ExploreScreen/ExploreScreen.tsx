@@ -34,7 +34,7 @@ useEffect(()=>{
 },[])
   return (
     <div>
-      <NavBarComponent />
+      <NavBarComponent Home={false} />
       <SearchBar getSearchResult={getSearchResult} />
       <StockList
         stocks={stocks}

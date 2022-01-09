@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Stock } from "../../Types/Stock";
 import * as actions from "../../StockDataStore/actions";
 

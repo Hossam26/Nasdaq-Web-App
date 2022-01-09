@@ -1,15 +1,21 @@
 import { State } from "../Types/State";
+import { TickerPrevDayInfo } from "../Types/TickerPrevDayInfo";
+import { TickerCompanyInfo } from "../Types/TickerCompanyInfo";
 
 export const state: State = {
-  Data: {
-    Stocks: [],
+  data: {
+    Stocks:[],
     NextUrl: "",
   },
   searchIsActive: false,
   firstSearch:true,
   searchKey: "",
-  searchresults: {
+  searchResults: {
     StockResults: [],
     NextUrl: "",
+  },
+   stockDetails: {
+    TickerPrevDayInfo:{} as TickerPrevDayInfo, 
+    TickerCompanyInfo: {} as TickerCompanyInfo
   },
 };

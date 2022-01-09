@@ -8,15 +8,15 @@
   z-index: 999;
   text-align: center;
   display: flex;
-  
+
   justify-content: center;
   align-items: center;
-  animation:fadeOut ease-in 6s;
+  animation: fadeOut ease-in 4s;
 }
 @keyframes fadeOut {
- to{
-     opacity: 0;
- }
+  to {
+    opacity: 0;
+  }
 }
 .name {
   position: absolute;
@@ -30,7 +30,6 @@
     opacity: 1;
   }
 }
-
 
 .fadeIn {
   transform: translateX(-20%);

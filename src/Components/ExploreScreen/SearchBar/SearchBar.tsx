@@ -1,8 +1,6 @@
 import React from "react";
 import { Form, FormControl } from "react-bootstrap";
 
-
-
 export type Props = {
   getSearchResult: (KeyWord: string) => void;
 };
@@ -16,7 +14,6 @@ const SearchBar: React.FC<Props> = ({ getSearchResult }) => {
         className="me-2"
         onChange={(e) => getSearchResult(e.target.value)}
       />
-      
     </Form>
   );
 };

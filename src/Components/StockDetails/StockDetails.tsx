@@ -2,31 +2,25 @@ import "./StockDetails.scss";
 import React, { useEffect } from "react";
 import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useStockDetails } from "./useStockDetails";
 import NavBarComponent from "../Navbar/Navbar";
 type MyParams = {
   Ticker: string;
 };
 const StockDetails: React.FC = () => {
- 
   const { stockPrevDayInfo, stockCompanyInfo, isLoadingData, getStockDetails } =
     useStockDetails();
-  const {Ticker}= useParams() as MyParams;
-  
- 
-useEffect(()=>{  
-  getStockDetails(Ticker);
+  const { Ticker } = useParams() as MyParams;
 
-},[])
+  useEffect(() => {
+    getStockDetails(Ticker);
+  }, []);
 
   return (
     <div>
       <NavBarComponent Home={true}></NavBarComponent>
-      <Container
-        className="d-flex flex-column mb-3"
-        fluid={true}
-      >
+      <Container className="d-flex flex-column mb-3" fluid={true}>
         <Row className="mx-1 justify-content-center">
           {isLoadingData && (
             <Spinner

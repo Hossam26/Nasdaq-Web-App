@@ -1,24 +1,19 @@
 import React from "react";
 
-import {
-  Button,
-  Container,
-  Navbar,
-} from "react-bootstrap";
+import { Button, Container, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import styled from 'styled-components';
-interface Iprops{
-  Home:boolean
+import styled from "styled-components";
+interface Iprops {
+  Home: boolean;
 }
-const NavBarComponent: React.FC<Iprops> = ({Home}) => {
-const StyledNavbar = styled(Navbar)`
-
-   height:7vh;
-   color:white;
-  a {
-    color: white !important;
-  }
-`;
+const NavBarComponent: React.FC<Iprops> = ({ Home }) => {
+  const StyledNavbar = styled(Navbar)`
+    height: 7vh;
+    color: white;
+    a {
+      color: white !important;
+    }
+  `;
   return (
     <StyledNavbar data-testid="navbar" bg="dark" expand="lg">
       <Container fluid>
@@ -74,7 +69,11 @@ const StyledNavbar = styled(Navbar)`
             ></path>
           </svg>
         </StyledNavbar.Brand>
-           {Home && <Link to="/"><Button variant="primary">Home</Button> </Link>}
+        {Home && (
+          <Link to="/">
+            <Button variant="primary">Home</Button>{" "}
+          </Link>
+        )}
       </Container>
     </StyledNavbar>
   );

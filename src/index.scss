@@ -1,19 +1,14 @@
+$bgColor: #202124;
 
-$bgColor:#202124;
+$fontColor: #fff;
+body {
+  overflow-x: hidden;
 
-$fontColor:#fff;
-body{
-    overflow-x: hidden;
-    
+  color: $fontColor;
+  font-family: sans-serif;
+
+  a {
+    text-decoration: none;
     color: $fontColor;
-    font-family: sans-serif;
-   
-      
-    a {
-        text-decoration: none;
-        color: $fontColor;
-    } 
-
-   
-   
+  }
 }

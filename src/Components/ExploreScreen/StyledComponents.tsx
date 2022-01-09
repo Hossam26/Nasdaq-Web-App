@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
-import {
-  Col,
-  Container,
-} from "react-bootstrap";
+import { Col, Container } from "react-bootstrap";
 
 export const Ticker = styled.h1`
   font-weight: bold !important;

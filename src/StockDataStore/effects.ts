@@ -4,14 +4,13 @@ import {
   apiStockUrl,
   apiSearchUrl,
   tickerPrevDayApi,
-  tickerCompanyDetailsApi
+  tickerCompanyDetailsApi,
 } from "../react-app-env";
 let cancelToken: CancelTokenSource;
 export const Api = {
   getInitialStocks: async () => {
     const stockApiResponse = await axios.get(`${apiStockUrl}&apiKey=${apiKey}`);
-   
-    
+
     return stockApiResponse.data;
   },
   getNextStockData: async (nextUrl: string) => {
@@ -36,15 +35,17 @@ export const Api = {
     return tockApiResponse.data;
   },
   getTickerPrevDayInfo: async (Ticker: string) => {
-    const prevDayResponse = await axios.get(`${tickerPrevDayApi}${Ticker}/prev?apiKey=${apiKey}`);
-   
-    
+    const prevDayResponse = await axios.get(
+      `${tickerPrevDayApi}${Ticker}/prev?apiKey=${apiKey}`
+    );
+
     return prevDayResponse.data;
   },
   getTickerCompanyInfo: async (Ticker: string) => {
-    const companyResponse = await axios.get(`${tickerCompanyDetailsApi}${Ticker}/company?apiKey=${apiKey}`);
-  
+    const companyResponse = await axios.get(
+      `${tickerCompanyDetailsApi}${Ticker}/company?apiKey=${apiKey}`
+    );
+
     return companyResponse.data;
   },
-  
 };

@@ -1,4 +1,4 @@
-export type Stock={
-    ticker:string|null,
-    name:string|null,
-}
+export type Stock = {
+  ticker: string | null;
+  name: string | null;
+};

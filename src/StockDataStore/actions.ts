@@ -9,23 +9,21 @@ export const loadApp = async () => {
     state.data.NextUrl = stateData.next_url;
     sessionStorage.setItem("State", JSON.stringify(state));
   } else {
-    const retrievedData = JSON.parse(sessionStorage.getItem("State") ||"{}") as State;
-    
+    const retrievedData = JSON.parse(
+      sessionStorage.getItem("State") || "{}"
+    ) as State;
+
     state.data = retrievedData.data;
   }
 
   return state.data.Stocks;
 };
 export const getNextData = async () => {
-  if(state.searchIsActive==true){
-    
-    
-      return getNextSearchData()
+  if (state.searchIsActive == true) {
+    return getNextSearchData();
+  } else {
+    return getNextStockData();
   }
-  else{
-    return getNextStockData()
-  }
-
 };
 export const getNextStockData = async () => {
   if (state.data.NextUrl != null) {
@@ -41,105 +39,95 @@ export const getNextStockData = async () => {
 };
 
 export const getNextSearchData = async () => {
-  
- if (state.searchResults.NextUrl != null) {
-   const nextSearchData = await effects.Api.getNextSearchData(state.searchResults.NextUrl);
+  if (state.searchResults.NextUrl != null) {
+    const nextSearchData = await effects.Api.getNextSearchData(
+      state.searchResults.NextUrl
+    );
 
-   state.searchResults.StockResults = [
-     ...state.searchResults.StockResults,
-     ...nextSearchData.results,
-   ];
+    state.searchResults.StockResults = [
+      ...state.searchResults.StockResults,
+      ...nextSearchData.results,
+    ];
 
-   state.searchResults.NextUrl = nextSearchData.next_url;
-     
+    state.searchResults.NextUrl = nextSearchData.next_url;
+  }
 
- }
-
-   return state.searchResults.StockResults;
-
+  return state.searchResults.StockResults;
 };
 export const Loadsearch = async () => {
-   const searchData = await effects.Api.getInitialSearch(state.searchKey)
-   state.searchResults.StockResults = searchData.results;
-   state.searchResults.NextUrl = searchData.next_url;
- 
- 
-return state.searchResults.StockResults
- 
+  const searchData = await effects.Api.getInitialSearch(state.searchKey);
+  state.searchResults.StockResults = searchData.results;
+  state.searchResults.NextUrl = searchData.next_url;
+
+  return state.searchResults.StockResults;
 };
-export const searchIsActive=(value:boolean)=>{
-
-state.searchIsActive=value;
-
-}
-export const setSearchKey=(value:string)=>{
-
-  state.searchKey=value;
-}
+export const searchIsActive = (value: boolean) => {
+  state.searchIsActive = value;
+};
+export const setSearchKey = (value: string) => {
+  state.searchKey = value;
+};
 export const getCurrentStocks = () => {
-    return state.data.Stocks;
-
+  return state.data.Stocks;
 };
-export const getStockDetails=async(Ticker:string)=>{
-  resetStockDetails()
-  if (!sessionStorage.getItem(Ticker.concat("Details"))){
- await getPrevDayInfo(Ticker);
- await getCompanyInfo(Ticker).catch((e) => {
-   console.log(e);
- });
-   sessionStorage.setItem(Ticker.concat("Details"),JSON.stringify(state.stockDetails));
+export const getStockDetails = async (Ticker: string) => {
+  resetStockDetails();
+  if (!sessionStorage.getItem(Ticker.concat("Details"))) {
+    await getPrevDayInfo(Ticker);
+    await getCompanyInfo(Ticker).catch((e) => {
+      console.log(e);
+    });
+    sessionStorage.setItem(
+      Ticker.concat("Details"),
+      JSON.stringify(state.stockDetails)
+    );
+  } else {
+    state.stockDetails = JSON.parse(
+      sessionStorage.getItem(Ticker.concat("Details")) || "{}"
+    );
   }
-  else{
-    state.stockDetails=JSON.parse(sessionStorage.getItem(Ticker.concat("Details"))||"{}")
-  }
-    
-     return state.stockDetails
-}
- const getPrevDayInfo = async(ticker:string) => {
-    const prevDayData = await effects.Api.getTickerPrevDayInfo(ticker);
-    state.stockDetails.TickerPrevDayInfo.ticker = ticker;
-    state.stockDetails.TickerPrevDayInfo.close=prevDayData.results[0].c;
-    state.stockDetails.TickerPrevDayInfo.open = prevDayData.results[0].o;
-    state.stockDetails.TickerPrevDayInfo.low =prevDayData.results[0].l;
-    state.stockDetails.TickerPrevDayInfo.high = prevDayData.results[0].h;
-    state.stockDetails.TickerPrevDayInfo.volume = prevDayData.results[0].v;
 
+  return state.stockDetails;
+};
+const getPrevDayInfo = async (ticker: string) => {
+  const prevDayData = await effects.Api.getTickerPrevDayInfo(ticker);
+  state.stockDetails.TickerPrevDayInfo.ticker = ticker;
+  state.stockDetails.TickerPrevDayInfo.close = prevDayData.results[0].c;
+  state.stockDetails.TickerPrevDayInfo.open = prevDayData.results[0].o;
+  state.stockDetails.TickerPrevDayInfo.low = prevDayData.results[0].l;
+  state.stockDetails.TickerPrevDayInfo.high = prevDayData.results[0].h;
+  state.stockDetails.TickerPrevDayInfo.volume = prevDayData.results[0].v;
+};
+const getCompanyInfo = async (value: string) => {
+  const name = getStockName(value);
+  state.stockDetails.TickerCompanyInfo.Name = name;
+  const companyData = await effects.Api.getTickerCompanyInfo(value);
 
+  state.stockDetails.TickerCompanyInfo.industry = companyData.industry;
+  state.stockDetails.TickerCompanyInfo.companyWebsite = companyData.url;
+  state.stockDetails.TickerCompanyInfo.Logo = companyData.logo;
+  state.stockDetails.TickerCompanyInfo.Description = companyData.description;
 };
- const getCompanyInfo = async (value: string) => {
- 
- const name=getStockName(value);
- state.stockDetails.TickerCompanyInfo.Name = name;
- const companyData = await effects.Api.getTickerCompanyInfo(value);
-   
-   state.stockDetails.TickerCompanyInfo.industry = companyData.industry;
-   state.stockDetails.TickerCompanyInfo.companyWebsite = companyData.url;
-   state.stockDetails.TickerCompanyInfo.Logo = companyData.logo;
-   state.stockDetails.TickerCompanyInfo.Description = companyData.description;
-};
- const getStockName =  (Ticker: string) => {
-   let name;
-  if(!sessionStorage.getItem(Ticker)){    
-       const stock = state.data.Stocks.filter(
-         (Stock) => Stock.ticker == Ticker
-       ); 
-   name = stock[0].name as string;
+const getStockName = (Ticker: string) => {
+  let name;
+  if (!sessionStorage.getItem(Ticker)) {
+    const stock = state.data.Stocks.filter((Stock) => Stock.ticker == Ticker);
+    name = stock[0].name as string;
     sessionStorage.setItem(Ticker, JSON.stringify(stock[0].name));
+  } else {
+    name = JSON.parse(sessionStorage.getItem(Ticker) || "");
   }
-  else{
-   name=JSON.parse(sessionStorage.getItem(Ticker)||"")   
-  }     
- return name
+  return name;
 };
-const resetStockDetails=()=>{
-   state.stockDetails.TickerCompanyInfo.industry =""
-   state.stockDetails.TickerCompanyInfo.companyWebsite ="";
-   state.stockDetails.TickerCompanyInfo.Logo ="";
-   state.stockDetails.TickerCompanyInfo.Description ="";
-   state.stockDetails.TickerPrevDayInfo.ticker = "";
-   state.stockDetails.TickerPrevDayInfo.close=null;
-   state.stockDetails.TickerPrevDayInfo.open =null;
-   state.stockDetails.TickerPrevDayInfo.low = null;
-   state.stockDetails.TickerPrevDayInfo.high = null;
-   state.stockDetails.TickerPrevDayInfo.volume = null;
-}
+const resetStockDetails = () => {
+  state.stockDetails.TickerCompanyInfo.industry = "";
+  state.stockDetails.TickerCompanyInfo.companyWebsite = "";
+  state.stockDetails.TickerCompanyInfo.Logo = "";
+  state.stockDetails.TickerCompanyInfo.Description = "";
+  state.stockDetails.TickerPrevDayInfo.ticker = "";
+  state.stockDetails.TickerPrevDayInfo.close = null;
+  state.stockDetails.TickerPrevDayInfo.open = null;
+  state.stockDetails.TickerPrevDayInfo.low = null;
+  state.stockDetails.TickerPrevDayInfo.high = null;
+  state.stockDetails.TickerPrevDayInfo.volume = null;
+};

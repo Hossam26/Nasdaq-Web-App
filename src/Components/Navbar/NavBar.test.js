@@ -5,7 +5,7 @@ import { act } from "react-dom/test-utils";
 describe("Navbar",()=>{
 it('the navbar appears',async ()=>{ 
       act(() => {
-  render(<NavBarComponent />)
+  render(<NavBarComponent Home={false} />)
 });
      expect(await screen.findByTestId(/navbar/i)).toBeVisible()
 })

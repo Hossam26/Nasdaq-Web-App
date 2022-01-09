@@ -10,7 +10,7 @@ export const useStockDetails=()=>{
 const getStockDetails =async (Ticker: string) => {
  const stockDetails= await actions.getStockDetails(Ticker);
  setStockPrevDayInfo(stockDetails.TickerPrevDayInfo);
-  setStockCompanyInfo(stockDetails.TickerCompanyInfo);
+ setStockCompanyInfo(stockDetails.TickerCompanyInfo);
 
 };    
 

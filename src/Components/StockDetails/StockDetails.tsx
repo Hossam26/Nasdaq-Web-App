@@ -1,6 +1,6 @@
 import "./StockDetails.scss";
 import React, { useEffect } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {  useParams } from "react-router-dom";
 import { useStockDetails } from "./useStockDetails";
@@ -10,7 +10,8 @@ type MyParams = {
 };
 const StockDetails: React.FC = () => {
  
-  const {stockPrevDayInfo,stockCompanyInfo, getStockDetails} = useStockDetails();
+  const { stockPrevDayInfo, stockCompanyInfo, isLoadingData, getStockDetails } =
+    useStockDetails();
   const {Ticker}= useParams() as MyParams;
   
  
@@ -23,10 +24,18 @@ useEffect(()=>{
     <div>
       <NavBarComponent Home={true}></NavBarComponent>
       <Container
-        className="d-flex flex-column jusitfy-content-center mb-3"
+        className="d-flex flex-column mb-3"
         fluid={true}
       >
-        <Row className="mx-1">
+        <Row className="mx-1 justify-content-center">
+          {isLoadingData && (
+            <Spinner
+              className="position-fixed"
+              data-testid="spinner"
+              animation="grow"
+              variant="light"
+            />
+          )}
           {stockCompanyInfo?.industry && (
             <img
               src={stockCompanyInfo?.Logo}

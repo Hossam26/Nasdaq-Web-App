@@ -39,6 +39,14 @@ const StockList: React.FC<Iprops> = ({
               )}
             </StyledGrid>
           ))}
+          {isLoadingStocks && (
+            <Spinner
+              className="position-fixed"
+              data-testid="spinner"
+              animation="grow"
+              variant="light"
+            />
+          )}
         </Row>
       </StyledContainer>
     </div>
